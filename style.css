@@ -1,0 +1,50 @@
+body {
+    background-color: rgb(184, 182, 182);
+}
+
+h1 {
+    text-align: center;
+    font-size: 60px;
+}
+
+.calculator-box {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 150px;
+    width: 400px;
+    height: 800px;
+    background-color: black;
+    border-radius: 5mm;
+
+}
+
+.display {
+    display: flex;
+    align-items: center;
+    font-size: 50px;
+    font-weight: 400;
+    color: white;
+    margin: 80px 15px 0px;
+    width: inherit;
+    height: 100px;
+}
+
+.buttons-section {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 24px;
+    border-style: none;
+}
+
+.top>button {
+    background-color: gray;
+}
+
