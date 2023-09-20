@@ -26,13 +26,16 @@ h1 {
     font-weight: 400;
     color: white;
     margin: 80px 15px 0px;
+    padding-left: 25px;
     width: inherit;
     height: 100px;
 }
 
 .buttons-section {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    
 }
 
 button {
@@ -44,7 +47,34 @@ button {
     border-style: none;
 }
 
-.top>button {
+.top-buttons-section>button , .numbers-buttons-section>button {
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 10px;
+}
+
+.top-buttons-section>button {
     background-color: gray;
 }
+
+.numbers-buttons-section>button  {
+    background-color: rgb(56, 55, 55);
+    color: white;
+}
+
+
+.numbers-buttons-section {
+   width: 320px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
