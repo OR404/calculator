@@ -13,10 +13,14 @@ h1 {
     margin: auto;
     margin-top: 150px;
     width: 400px;
-    height: 800px;
+    height: 795px;
     background-color: black;
     border-radius: 5mm;
 
+}
+
+.time {
+    color: white;
 }
 
 .display {
@@ -26,7 +30,6 @@ h1 {
     font-weight: 400;
     color: white;
     margin: 80px 15px 0px;
-    padding-left: 25px;
     width: inherit;
     height: 100px;
 }
@@ -45,27 +48,48 @@ button {
     font-weight: bold;
     font-size: 24px;
     border-style: none;
+    color: white;
+    
 }
 
-.top-buttons-section>button , .numbers-buttons-section>button {
-    margin-left: 4px;
-    margin-right: 4px;
+.middle-buttons-section>.operator {
+    background-color: rgb(226, 149, 6);
+}
+
+.number#zero {
+    width: 179.5px;
+    border-radius: 40px;
+}
+
+.operator#equals {
+    width: 379px;
+    border-radius:40px;
+}
+
+
+
+.top-buttons-section>button , .middle-buttons-section>button {
+    margin-left: 8px;
+    margin-right: 8px;
     margin-top: 10px;
 }
 
 .top-buttons-section>button {
     background-color: gray;
+    color: black;
 }
 
-.numbers-buttons-section>button  {
+.middle-buttons-section>.number  {
     background-color: rgb(56, 55, 55);
     color: white;
 }
 
 
-.numbers-buttons-section {
-   width: 320px;
-}
+
+
+
+
+
 
 
 
