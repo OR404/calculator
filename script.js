@@ -1,3 +1,17 @@
+
+function updateClock() {
+const time = document.querySelector('.time');
+const currentTime = new Date();
+time.textContent = `${currentTime.getHours()}:${currentTime.getMinutes()}`;
+}
+updateClock();
+setInterval(updateClock,60000);
+
+
+
+
+
+
 function add(a,b) {
     return a + b;
 }
