@@ -8,17 +8,21 @@ updateClock();
 setInterval(updateClock,60000);
 
 
- 
+const display = document.querySelector('.display');
 const buttons = document.querySelectorAll('button:not(#ON-OFF):not(#positive-negative):not(#divide)');
 const calculationArr = [];
 buttons.forEach(button=>{
 button.addEventListener('click' , ()=>{
     calculationArr.push(button.textContent);
-    console.log(calculationArr);
+    display.textContent = calculationArr.join('');
 })
 })
 
-
+const resetButton = document.querySelector('#ON-OFF')
+resetButton.addEventListener('click',()=>{
+    display.textContent = '0';
+    calculationArr.length = 0;
+})
 
 
 
