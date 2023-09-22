@@ -1,5 +1,5 @@
 const buttons = document.querySelectorAll('button:not(#positive-negative)');
-const resetButton = document.querySelector('#ON-OFF');
+const clearButton = document.querySelector('#clear');
 const display = document.querySelector('.display');
 const calculationArr = [];
 
@@ -23,12 +23,14 @@ buttons.forEach(button=>{
 button.addEventListener('click' , ()=>{
     if(button.id === 'divide') {
         calculationArr.push('/');
-    }else if(button.id === 'ON-OFF') {
+        display.textContent = calculationArr.join('');
+    }else if(button.id === 'clear') {
             display.textContent = '0';
             calculationArr.length = 0;
-    }else {calculationArr.push(button.textContent);}
+    }else {
+        calculationArr.push(button.textContent);
+        display.textContent = calculationArr.join('');}
 
-    display.textContent = calculationArr.join('');
     button.classList.toggle('button-clicked');
     setTimeout(()=> {button.classList.remove('button-clicked'); } , 200);
     });
@@ -37,10 +39,7 @@ button.addEventListener('click' , ()=>{
 
 
 
-/*resetButton.addEventListener('click',()=>{
-    display.textContent = '0';
-    calculationArr.length = 0;
-})*/
+
 
 
 
