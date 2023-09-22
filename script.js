@@ -8,6 +8,18 @@ updateClock();
 setInterval(updateClock,60000);
 
 
+ 
+const buttons = document.querySelectorAll('button:not(#ON-OFF):not(#positive-negative):not(#divide)');
+const calculationArr = [];
+buttons.forEach(button=>{
+button.addEventListener('click' , ()=>{
+    calculationArr.push(button.textContent);
+    console.log(calculationArr);
+})
+})
+
+
+
 
 
 
