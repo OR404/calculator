@@ -127,6 +127,11 @@ button {
     color: white;
 }
 
+.button-clicked {
+    filter: brightness(1.2);
+    transition: filter 0.2s ease;
+}
+
 
 
 

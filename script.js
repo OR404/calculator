@@ -1,28 +1,48 @@
+const buttons = document.querySelectorAll('button:not(#positive-negative)');
+const resetButton = document.querySelector('#ON-OFF');
+const display = document.querySelector('.display');
+const calculationArr = [];
+
+
 
 function updateClock() {
 const time = document.querySelector('.time');
 const currentTime = new Date();
-time.textContent = `${currentTime.getHours()}:${currentTime.getMinutes()}`;
+let hours = currentTime.getHours();
+let minutes = currentTime.getMinutes();
+minutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+hours = hours < 10 ? `0${hours}` : `${hours}`;
+time.textContent = `${hours}:${minutes}`;
 }
 updateClock();
 setInterval(updateClock,60000);
 
 
-const display = document.querySelector('.display');
-const buttons = document.querySelectorAll('button:not(#ON-OFF):not(#positive-negative):not(#divide)');
-const calculationArr = [];
+
 buttons.forEach(button=>{
 button.addEventListener('click' , ()=>{
-    calculationArr.push(button.textContent);
-    display.textContent = calculationArr.join('');
-})
-})
+    if(button.id === 'divide') {
+        calculationArr.push('/');
+    }else if(button.id === 'ON-OFF') {
+            display.textContent = '0';
+            calculationArr.length = 0;
+    }else {calculationArr.push(button.textContent);}
 
-const resetButton = document.querySelector('#ON-OFF')
-resetButton.addEventListener('click',()=>{
+    display.textContent = calculationArr.join('');
+    button.classList.toggle('button-clicked');
+    setTimeout(()=> {button.classList.remove('button-clicked'); } , 200);
+    });
+});
+
+
+
+
+/*resetButton.addEventListener('click',()=>{
     display.textContent = '0';
     calculationArr.length = 0;
-})
+})*/
+
+
 
 
 
