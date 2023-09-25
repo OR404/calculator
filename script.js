@@ -15,11 +15,10 @@ hours = hours < 10 ? `0${hours}` : `${hours}`;
 time.textContent = `${hours}:${minutes}`;
 }
 updateClock();
-setInterval(updateClock,60000);
+setInterval(updateClock,30000);
 
 
-
-buttons.forEach(button=>{
+/*buttons.forEach(button=>{
 button.addEventListener('click' , ()=>{
     if(button.id === 'divide') {
         calculationArr.push('/');
@@ -31,10 +30,54 @@ button.addEventListener('click' , ()=>{
         calculationArr.push(button.textContent);
         display.textContent = calculationArr.join('');}
 
+
     button.classList.toggle('button-clicked');
     setTimeout(()=> {button.classList.remove('button-clicked'); } , 200);
+    console.log(calculationArr);
     });
-});
+});*/
+
+
+
+buttons.forEach(button=>{
+    button.addEventListener('click' , ()=>{
+        let lastElement = calculationArr[calculationArr.length-1];
+        if(typeof lastElement === 'number') {
+            calculationArr[calculationArr.length - 1] = parseInt(lastElement.toString() + button.textContent);
+            display.textContent = calculationArr.join('');
+        }
+        else if(button.id === 'operator') {
+            calculationArr.push(button.textContent);
+            display.textContent = calculationArr.join('');
+        }
+        else if(button.id === 'clear') {
+            display.textContent = '0';
+            calculationArr.length = 0;
+        }
+        else {
+            
+        }
+        
+
+        console.log(calculationArr);
+        console.log(lastElement);
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
