@@ -21,15 +21,19 @@ setInterval(updateClock,30000);
         button.addEventListener('click' , ()=>{
             let lastElement = calculationArr[calculationArr.length-1];
             if(typeof lastElement === 'undefined') {
-                if(button.classList.contains('number')){calculationArr.push(parseInt(button.textContent))};
+                if(button.classList.contains('number')){calculationArr.push(parseFloat(button.textContent))};
             }
-            else if(button.classList.contains('operator') && typeof lastElement === 'number') {
+            else if(button.classList.contains('operator') && typeof lastElement === 'number' && button.id !== 'dot') {
                 calculationArr.push(button.textContent);  
             }
             else if(button.classList.contains('number')) {
-                if(typeof lastElement === 'number'){calculationArr[calculationArr.length - 1] = parseInt(`${lastElement}${button.textContent}`);}
-                else{calculationArr.push(parseInt(button.textContent)); };
-            }  
+                if(typeof lastElement === 'number' || lastElement.charAt(lastElement.length-1)=== '.')
+                {calculationArr[calculationArr.length - 1] = parseFloat(`${lastElement}${button.textContent}`);}
+                else{calculationArr.push(parseFloat(button.textContent)); };
+            }
+            else if(button.id === 'dot' && !lastElement.toString().includes('.')  ){
+                if(typeof lastElement === 'number'){calculationArr[calculationArr.length - 1] +='.'};
+            }
             else if(button.id === 'clear') {
                 display.textContent = '0';
                 calculationArr.length = 0;
