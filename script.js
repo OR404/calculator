@@ -1,8 +1,13 @@
-const buttons = document.querySelectorAll('button:not(#positive-negative)');
+const buttons = document.querySelectorAll('button:not(#positive-negative):not(#equals)');
 const clearButton = document.querySelector('#clear');
 const display = document.querySelector('.display');
 const calculationArr = [];
 
+
+function buttonClickEffect(button) {
+    button.classList.toggle('button-clicked');
+    setTimeout(()=> {button.classList.remove('button-clicked'); } , 200);
+};
 
 
 function updateClock() {
@@ -34,23 +39,19 @@ setInterval(updateClock,30000);
             else if(button.id === 'dot' && !lastElement.toString().includes('.')  ){
                 if(typeof lastElement === 'number'){calculationArr[calculationArr.length - 1] +='.'};
             }
-            else if(button.id === 'clear') {
-                display.textContent = '0';
-                calculationArr.length = 0;
-            }
-            console.log(calculationArr);
+            else if(button.id === 'clear') {calculationArr.length = 0;}
+            else if(button.id === 'DEL'){calculationArr.pop();}
+
             display.textContent = calculationArr.join('');
-    
-            button.classList.toggle('button-clicked');
-            setTimeout(()=> {button.classList.remove('button-clicked'); } , 200);
             console.log(calculationArr);
+            buttonClickEffect(button);
             });
         });
 
 
-
-
-
+   
+    
+            
 
 
 
