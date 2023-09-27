@@ -1,5 +1,5 @@
-const buttons = document.querySelectorAll('button:not(#positive-negative):not(#equals)');
-const clearButton = document.querySelector('#clear');
+const buttons = document.querySelectorAll('button:not(#equals)');
+const equalsButton = document.querySelector('#equals');
 const display = document.querySelector('.display');
 const calculationArr = [];
 
@@ -49,10 +49,27 @@ setInterval(updateClock,30000);
         });
 
 
+        equalsButton.addEventListener('click' , ()=>{
+
+            if(typeof calculationArr[calculationArr.length-1] === 'number') {
+            /*for(let i = 1 ;  i<calculationArr.length ; i++) {
+
+
+
+            }*/
+            console.log('check');
+            
+        }
+        
+
+
+            buttonClickEffect(equalsButton);
+        })
+
    
     
             
-
+        
 
 
 
