@@ -52,12 +52,20 @@ setInterval(updateClock,30000);
         equalsButton.addEventListener('click' , ()=>{
 
             if(typeof calculationArr[calculationArr.length-1] === 'number') {
-            /*for(let i = 1 ;  i<calculationArr.length ; i++) {
+            for(let i = 0 ;  i<calculationArr.length ; i++) {
+                let result = 0;
+                let currentCalculation = 0;
+                if(calculationArr[i] === '*' || calculationArr[i] === '/'){
+                    currentCalculation = operate(calculationArr[i-1],calculationArr[i],calculationArr[i+1]);
+                    calculationArr.splice(i-1,3,currentCalculation);
+                    console.log(currentCalculation);
+
+                }
 
 
-
-            }*/
-            console.log('check');
+            }
+            console.log(calculationArr);
+          
             
         }
         
