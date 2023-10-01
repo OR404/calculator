@@ -86,6 +86,8 @@ function orderOfOperations (array) {
 
 
         equalsButton.addEventListener('click' , ()=>{
+
+            if(toggleParentheses === false) {
             for(let i = 0 ; i<calculationArr.length ; i++) {
             let parenthesesExpression = [];
             if(calculationArr[i] === '('){
@@ -96,8 +98,9 @@ function orderOfOperations (array) {
             console.log('calculation array before splice:' + calculationArr);
             calculationArr.splice(calculationArr.indexOf('('),parenthesesLength+1,orderOfOperations(parenthesesExpression));
             console.log('calculation array after splice: ' + calculationArr);
-            }}
-       
+                }
+            }
+        }
             if(typeof calculationArr[calculationArr.length-1] === 'number' && toggleParentheses === false){ 
             orderOfOperations(calculationArr); 
             }
