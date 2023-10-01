@@ -5,6 +5,7 @@ const clearButton = document.querySelector('#clear');
 const deleteButton = document.querySelector('#DEL');
 const display = document.querySelector('.display');
 const calculationArr = [];
+let toggleParentheses = false;
 
 
 function buttonClickEffect(button) {
@@ -26,25 +27,23 @@ updateClock();
 setInterval(updateClock,30000);
 
 
-function orderOfOperations (calculationArr) {
-    if(typeof calculationArr[calculationArr.length-1] === 'number') {
-        while(calculationArr.includes('*') ||calculationArr.includes('/') ){
-        for(let i = 0 ;  i<calculationArr.length ; i++) {
+function orderOfOperations (array) {
+        while(array.includes('*') ||array.includes('/') ){
+        for(let i = 0 ;  i<array.length ; i++) {
             let currentCalculation = null;
-            if(calculationArr[i] === '*' || calculationArr[i] === '/'){
-                currentCalculation = operate(calculationArr[i-1],calculationArr[i],calculationArr[i+1]);
-                calculationArr.splice(i-1,3,currentCalculation);
+            if(array[i] === '*' || array[i] === '/'){
+                currentCalculation = operate(array[i-1],array[i],array[i+1]);
+                array.splice(i-1,3,currentCalculation);
             }}}
-        while(calculationArr.includes('+') || calculationArr.includes('-')){
-        for(let i = 0 ; i<calculationArr.length ; i++){
+        while(array.includes('+') || array.includes('-')){
+        for(let i = 0 ; i<array.length ; i++){
             let currentCalculation2 = null;
-            if(calculationArr[i] === '+' || calculationArr[i] === '-'){
-            currentCalculation2 = operate(calculationArr[i-1],calculationArr[i],calculationArr[i+1]);
-            calculationArr.splice(i-1,3,currentCalculation2);
-           console.log(currentCalculation2);
+            if(array[i] === '+' || array[i] === '-'){
+            currentCalculation2 = operate(array[i-1],array[i],array[i+1]);
+            array.splice(i-1,3,currentCalculation2);
         }}}
-        display.textContent = calculationArr.join(''); 
-    }
+
+        return parseFloat(array.join(' '));
 }
 
 
@@ -54,7 +53,7 @@ function orderOfOperations (calculationArr) {
             if(typeof lastElement === 'undefined') {
                 if(button.classList.contains('number')){calculationArr.push(parseFloat(button.textContent))};
             }
-            else if(button.classList.contains('operator')  && typeof lastElement === 'number' && button.id !== 'dot') {
+            else if(button.classList.contains('operator')  && (typeof lastElement === 'number' || lastElement === ')') && button.id !== 'dot') {
                 calculationArr.push(button.textContent);  
             }
             else if(button.classList.contains('number')) {
@@ -72,67 +71,75 @@ function orderOfOperations (calculationArr) {
         });
         
         clearButton.addEventListener('click' , ()=>{
+            toggleParentheses = false;
             calculationArr.length = 0;
             display.textContent = calculationArr.join('');
             buttonClickEffect(clearButton);
         })
         deleteButton.addEventListener('click' , ()=>{
+           if(calculationArr[calculationArr.length-1] === '('){toggleParentheses = false;}
+           else if (calculationArr[calculationArr.length-1] === ')'){toggleParentheses = true;}
             calculationArr.pop();
             display.textContent = calculationArr.join('');
             buttonClickEffect(deleteButton);
         })
+
+
         equalsButton.addEventListener('click' , ()=>{
+            for(let i = 0 ; i<calculationArr.length ; i++) {
+            let parenthesesExpression = [];
+            if(calculationArr[i] === '('){
+            let parenthesesLength = calculationArr.indexOf(')')-calculationArr.indexOf('(');
+            parenthesesExpression = calculationArr.slice(calculationArr.indexOf('(')+1, calculationArr.indexOf(')'));
+            console.log('parenthses length:' + parenthesesLength);
+            console.log('parenthses expression:' + parenthesesExpression);
+            console.log('calculation array before splice:' + calculationArr);
+            calculationArr.splice(calculationArr.indexOf('('),parenthesesLength+1,orderOfOperations(parenthesesExpression));
+            console.log('calculation array after splice: ' + calculationArr);
+            }}
+       
+            if(typeof calculationArr[calculationArr.length-1] === 'number' && toggleParentheses === false){ 
+            orderOfOperations(calculationArr); 
+            }
+
             buttonClickEffect(equalsButton);
-            orderOfOperations(calculationArr);
+            display.textContent = calculationArr.join(''); 
         })
 
-
-
-
-        let toggleParentheses = false;
+       
         parentheses.forEach(button=>{
             button.addEventListener('click' , ()=>{
             let lastElement = calculationArr[calculationArr.length-1];
-
-                if(button.id === 'left-parentheses'&& typeof lastElement === 'string' && operatorInArrayCheck(calculationArr)) {
-                    buttonClickEffect(button);
+                if(button.id === 'left-parentheses'&& typeof lastElement === 'string' && lastElement !== ')' && toggleParentheses === false  && isOperatorInArray(calculationArr)) {
+                    toggleParentheses = true;
+                    calculationArr.push(button.textContent);
+                    display.textContent = calculationArr.join('');
                 }
-
-
-
-
-
-
-
-
-
-
-
-                //buttonClickEffect(button);
+                if(button.id === 'right-parentheses' && typeof lastElement === 'number' && toggleParentheses == true && isOperatorInArrayParentheses(calculationArr)){
+                    toggleParentheses = false;
+                    calculationArr.push(button.textContent);
+                    display.textContent = calculationArr.join('');
+                }
+                console.log(calculationArr);
+                buttonClickEffect(button);
             })
         })
       
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function operatorInArrayCheck(array) {
+function isOperatorInArray(array) {
    if(array.includes('/') || array.includes('*') || array.includes('-') || array.includes('+')){
     return true;
    }
 }
+
+
+function isOperatorInArrayParentheses(array){
+    parenthesesArray = array.slice(array.indexOf('('));
+    if(isOperatorInArray(parenthesesArray)){
+        return true;
+    }
+}
+
 
 function add(a,b) {
     return a + b;
