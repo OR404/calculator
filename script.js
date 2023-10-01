@@ -93,11 +93,7 @@ function orderOfOperations (array) {
             if(calculationArr[i] === '('){
             let parenthesesLength = calculationArr.indexOf(')')-calculationArr.indexOf('(');
             parenthesesExpression = calculationArr.slice(calculationArr.indexOf('(')+1, calculationArr.indexOf(')'));
-            console.log('parenthses length:' + parenthesesLength);
-            console.log('parenthses expression:' + parenthesesExpression);
-            console.log('calculation array before splice:' + calculationArr);
             calculationArr.splice(calculationArr.indexOf('('),parenthesesLength+1,orderOfOperations(parenthesesExpression));
-            console.log('calculation array after splice: ' + calculationArr);
                 }
             }
         }
@@ -123,7 +119,6 @@ function orderOfOperations (array) {
                     calculationArr.push(button.textContent);
                     display.textContent = calculationArr.join('');
                 }
-                console.log(calculationArr);
                 buttonClickEffect(button);
             })
         })
