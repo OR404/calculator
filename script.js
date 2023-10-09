@@ -14,7 +14,7 @@ function buttonClickEffect(button) {
 };
 
 
-function updateClock() {
+function updateClock() { // keeps phone time dynamic 
 const time = document.querySelector('.time');
 const currentTime = new Date();
 let hours = currentTime.getHours();
@@ -27,7 +27,7 @@ updateClock();
 setInterval(updateClock,30000);
 
 
-function orderOfOperations (array) {
+function orderOfOperations (array) { // handles operations order 
         while(array.includes('*') ||array.includes('/') ){
         for(let i = 0 ;  i<array.length ; i++) {
             let currentCalculation = null;
@@ -42,12 +42,11 @@ function orderOfOperations (array) {
             currentCalculation2 = operate(array[i-1],array[i],array[i+1]);
             array.splice(i-1,3,currentCalculation2);
         }}}
-
         return parseFloat(array.join(' '));
 }
 
 
-    numsAndOperatorsButton.forEach(button=>{
+    numsAndOperatorsButton.forEach(button=>{ // determines what will enter the math equation . 
         button.addEventListener('click' , ()=>{
             let lastElement = calculationArr[calculationArr.length-1];
             if(typeof lastElement === 'undefined') {
@@ -70,13 +69,14 @@ function orderOfOperations (array) {
             });
         });
         
-        clearButton.addEventListener('click' , ()=>{
+        clearButton.addEventListener('click' , ()=>{ // clear button functionality
             toggleParentheses = false;
             calculationArr.length = 0;
             display.textContent = calculationArr.join('');
             buttonClickEffect(clearButton);
         })
-        deleteButton.addEventListener('click' , ()=>{
+
+        deleteButton.addEventListener('click' , ()=>{ // delete button functionality
            if(calculationArr[calculationArr.length-1] === '('){toggleParentheses = false;}
            else if (calculationArr[calculationArr.length-1] === ')'){toggleParentheses = true;}
             calculationArr.pop();
@@ -84,9 +84,7 @@ function orderOfOperations (array) {
             buttonClickEffect(deleteButton);
         })
 
-
-        equalsButton.addEventListener('click' , ()=>{
-
+        equalsButton.addEventListener('click' , ()=>{ // equal button functionality and math equation solving
             if(toggleParentheses === false) {
             for(let i = 0 ; i<calculationArr.length ; i++) {
             let parenthesesExpression = [];
@@ -97,16 +95,12 @@ function orderOfOperations (array) {
                 }
             }
         }
-            if(typeof calculationArr[calculationArr.length-1] === 'number' && toggleParentheses === false){ 
-            orderOfOperations(calculationArr); 
-            }
-
+            if(typeof calculationArr[calculationArr.length-1] === 'number' && toggleParentheses === false){ orderOfOperations(calculationArr);}
             buttonClickEffect(equalsButton);
             display.textContent = calculationArr.join(''); 
         })
 
-       
-        parentheses.forEach(button=>{
+        parentheses.forEach(button=>{ // parentheses logic and conditions
             button.addEventListener('click' , ()=>{
             let lastElement = calculationArr[calculationArr.length-1];
                 if(button.id === 'left-parentheses'&& typeof lastElement === 'string' && lastElement !== ')' && toggleParentheses === false  && isOperatorInArray(calculationArr)) {
@@ -123,21 +117,26 @@ function orderOfOperations (array) {
             })
         })
       
-
-function isOperatorInArray(array) {
+function isOperatorInArray(array) { // checks if the following operators are inside an array 
    if(array.includes('/') || array.includes('*') || array.includes('-') || array.includes('+')){
     return true;
    }
 }
 
 
-function isOperatorInArrayParentheses(array){
+function isOperatorInArrayParentheses(array){ // checks if the following operators are inside an array parentheses
     parenthesesArray = array.slice(array.indexOf('('));
     if(isOperatorInArray(parenthesesArray)){
         return true;
     }
 }
 
+function operate(num1 , operator , num2) { // operations functionality 
+    if(operator=== '+') {return add(num1,num2)};
+    if(operator=== '-') {return subtract(num1,num2)};
+    if(operator=== '*') {return multiply(num1,num2)};
+    if(operator=== '/') {return divide(num1,num2)};
+}
 
 function add(a,b) {
     return a + b;
@@ -153,11 +152,4 @@ function multiply (a,b) {
 
 function divide (a,b) {
     return a / b ;
-}
-
-function operate(num1 , operator , num2) {
-    if(operator=== '+') {return add(num1,num2)};
-    if(operator=== '-') {return subtract(num1,num2)};
-    if(operator=== '*') {return multiply(num1,num2)};
-    if(operator=== '/') {return divide(num1,num2)};
 }
