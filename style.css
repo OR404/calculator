@@ -113,7 +113,7 @@ button {
     color: black;
 }
 
-.middle-buttons-section>.number  {
+.middle-buttons-section>.number , #dot  {
     background-color: rgb(56, 55, 55);
     color: white;
 }
