@@ -5,7 +5,6 @@ body {
     align-items: center;
     justify-content: center;
     height: 75em;
-    
 }
 
 h1 {
@@ -20,7 +19,6 @@ h1 {
     width: 456px;
     height: 918px;
     position: relative;
-
 }
 
 .screen {
@@ -33,7 +31,6 @@ h1 {
     height: 870px;
     background-color: black;
     border-radius: 8mm;
-
 }
 
 .top-bar {
@@ -57,12 +54,9 @@ h1 {
     font-weight: 550;
 }
 
-
-
 img {
     width: 27px;
     height: 27px;
-    
 }
 
 .display {
@@ -90,8 +84,7 @@ button {
     font-weight: bold;
     font-size: 24px;
     border-style: none;
-    color: white;
-    
+    color: white; 
 }
 
 .middle-buttons-section>.operator {
@@ -108,8 +101,6 @@ button {
     height: 100px;
     border-radius:40px;
 }
-
-
 
 .top-buttons-section>button , .middle-buttons-section>button {
     margin-left: 8px;
